@@ -1,0 +1,10 @@
+<div class="produto">
+  @for (produto of produtos; track $index) {
+    <section>
+      <h3>{{ produto.nome | uppercase }}</h3>
+      @if (mostrarPreco) {
+        <p>Preço: {{ produto.preco | currency: 'BRL' }}</p>
+      }
+    </section>
+  }
+</div>
