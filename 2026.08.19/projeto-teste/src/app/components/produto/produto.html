@@ -3,7 +3,7 @@
     <section>
       <h3>{{ produto.nome | uppercase }}</h3>
       @if (mostrarPreco) {
-        <p>Preço: {{ produto.preco | currency: 'BRL' }}</p>
+        <p>Preço: {{ produto.preco | precoFormatado }}</p>
       }
     </section>
   }
