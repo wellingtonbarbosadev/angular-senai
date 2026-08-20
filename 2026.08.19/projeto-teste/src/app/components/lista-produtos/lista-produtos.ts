@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { Produto } from '../produto/produto';
 
 @Component({
@@ -8,6 +8,10 @@ import { Produto } from '../produto/produto';
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
+  exibirProdutos(produto: { nome: string; preco: number }) {
+    console.log(produto);
+  }
+
   produtos = [
     { nome: 'Mouse', preco: 122 },
     { nome: 'Teclado', preco: 252 },

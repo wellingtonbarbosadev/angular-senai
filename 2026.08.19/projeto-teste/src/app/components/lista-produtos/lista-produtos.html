@@ -1,3 +1,3 @@
 @for (produto of produtos; track $index) {
-  <app-produto [nome]="produto.nome" [preco]="produto.preco"></app-produto>
+  <app-produto [nome]="produto.nome" [preco]="produto.preco" (produtoSelecionado)="exibirProdutos($event)"></app-produto>
 }
