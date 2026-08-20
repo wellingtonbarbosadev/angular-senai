@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { ListaProdutos } from './components/lista-produtos/lista-produtos';
+import { ListaProdutos } from './features/produtos/lista-produtos/lista-produtos';
 
 @Component({
   selector: 'app-root',
   imports: [ListaProdutos],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('projeto-teste');
