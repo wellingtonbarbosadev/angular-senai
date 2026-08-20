@@ -1,10 +1,4 @@
-<div class="produto">
-  @for (produto of produtos; track $index) {
-    <section>
-      <h3>{{ produto.nome | uppercase }}</h3>
-      @if (mostrarPreco) {
-        <p>Preço: {{ produto.preco | precoFormatado }}</p>
-      }
-    </section>
-  }
-</div>
+<section class="produto-card">
+  <h3>{{ nome | uppercase }}</h3>
+  <p>Preço: {{ preco | precoFormatado }}</p>
+</section>
