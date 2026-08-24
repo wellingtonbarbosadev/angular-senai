@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
+import { PrecoBrlFormatadoPipe } from '../../../shared/pipes/preco-brl-formatado-pipe';
 
 @Component({
   selector: 'app-produto',
-  imports: [UpperCasePipe, PrecoFormatadoPipe],
+  imports: [UpperCasePipe, PrecoBrlFormatadoPipe],
   templateUrl: './produto.html',
   styleUrl: './produto.css',
 })

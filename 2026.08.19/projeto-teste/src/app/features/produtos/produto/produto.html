@@ -1,6 +1,6 @@
 <section class="produto-card">
   <h3>{{ nome | uppercase }}</h3>
-  <p>Preço: {{ preco | precoFormatado }}</p>
+  <p>Preço: {{ preco | precoBrlFormatado }}</p>
 
   <button (click)="selecionarProduto()">Selecionar {{ nome }}</button>
 </section>

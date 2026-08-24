@@ -1,7 +1,9 @@
 <h2>
   Produto selecionado:
   @if (produtoSelecionado()) {
-    <strong> {{ produtoSelecionado()?.nome }} - R$ {{ produtoSelecionado()?.preco }} </strong>
+    <strong>
+      {{ produtoSelecionado()?.nome }} - {{ produtoSelecionado()?.preco | precoBrlFormatado }}
+    </strong>
   } @else {
     <span>Nenhum</span>
   }
@@ -15,7 +17,22 @@
     [preco]="produto.preco"
     (produtoSelecionado)="exibirProdutos($event)"
   ></app-produto>
+
+  <button (click)="adicionarAoCarrinho(produto)">Adicionar ao carrinho</button>
 }
 
 <h2>Total de produtos: {{ totalProdutos() }}</h2>
-<h3>Valor total: R$ {{ valorTotal() }}</h3>
+<h3>Valor total: {{ valorTotal() | precoBrlFormatado }}</h3>
+
+<hr />
+
+<h2>Carrinho</h2>
+
+@if (quantidadeCarrinho() === 0) {
+  <p>Sem produtos no carrinho</p>
+} @else {
+  @for (item of carrinho(); track $index) {
+    <p>{{ item.nome }} - {{ item.preco | precoBrlFormatado }}</p>
+  }
+  <strong>Valor total do carrinho: {{ totalCarrinho() | precoBrlFormatado }}</strong>
+}
