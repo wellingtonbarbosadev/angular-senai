@@ -1,3 +1,21 @@
-@for (produto of produtos; track $index) {
-  <app-produto [nome]="produto.nome" [preco]="produto.preco" (produtoSelecionado)="exibirProdutos($event)"></app-produto>
+<h2>
+  Produto selecionado:
+  @if (produtoSelecionado()) {
+    <strong> {{ produtoSelecionado()?.nome }} - R$ {{ produtoSelecionado()?.preco }} </strong>
+  } @else {
+    <span>Nenhum</span>
+  }
+</h2>
+
+<p><button (click)="adicionarProduto()">Adicionar Produto</button></p>
+
+@for (produto of produtos(); track $index) {
+  <app-produto
+    [nome]="produto.nome"
+    [preco]="produto.preco"
+    (produtoSelecionado)="exibirProdutos($event)"
+  ></app-produto>
 }
+
+<h2>Total de produtos: {{ totalProdutos() }}</h2>
+<h3>Valor total: R$ {{ valorTotal() }}</h3>
