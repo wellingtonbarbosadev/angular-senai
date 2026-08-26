@@ -1,7 +1,7 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal, inject } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { PrecoBrlFormatadoPipe } from '../../../shared/pipes/preco-brl-formatado-pipe';
-import { HttpClient } from '@angular/common/http';
+import { ProdutosService } from '../produtos.service';
 
 type ProdutoType = { nome: string; preco: number };
 @Component({
@@ -14,8 +14,10 @@ export class ListaProdutos {
   produtos = signal<ProdutoType[]>([]);
   carregando = signal(true)
 
+  service = new ProdutosService()
 
-  constructor(private http: HttpClient) {
+
+  constructor() {
     this.carregarProdutos()
     effect(() => {
       if (typeof document !== 'undefined') {
@@ -33,23 +35,17 @@ export class ListaProdutos {
 
   carregarProdutos() {
     this.carregando.set(true)
-    this.http.get<{title: string, price: number}[]>("https://fakestoreapi.com/products").subscribe(
-      {
-        next: (data) => {
-          const produtosFormatados = data.map(p => ({
-            nome: p.title,
-            preco: p.price
-          }))
-
-          this.produtos.set(produtosFormatados)
-          this.carregando.set(false)
-        },
-        error: (error) => {
-          console.error(`Erro ao carregar produtos: ${error}`);
-          this.carregando.set(false)
-        }
+    this.service.buscarProdutos().subscribe({
+      next: (dados) => {
+        const produtos = this.service.transformarProdutos(dados)
+        this.produtos.set(produtos)
+        this.carregando.set(false)
+      },
+      error: (error) => {
+        console.error("Ocorreu um erro ao carregar os produtos:", error);
+        this.carregando.set(false)
       }
-    )
+    })
   }
 
   exibirProdutos(produto: ProdutoType) {
