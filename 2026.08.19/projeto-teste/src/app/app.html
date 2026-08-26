@@ -5,6 +5,12 @@
   <a routerLink="/carrinho">Carrinho</a>
 </nav>
 
-<hr>
+@if (usuarioLogado()) {
+  <button (click)="logout()">Logout</button>
+} @else {
+  <button (click)="login()">Login</button>
+}
+
+<hr />
 
 <router-outlet></router-outlet>

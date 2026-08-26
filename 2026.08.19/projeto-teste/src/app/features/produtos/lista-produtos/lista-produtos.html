@@ -11,6 +11,10 @@
 
 <p><button (click)="adicionarProduto()">Adicionar Produto</button></p>
 
+@if (carregando()) {
+  <p>Carregando produtos...</p>
+}
+
 @for (produto of produtos(); track $index) {
   <app-produto
     [nome]="produto.nome"

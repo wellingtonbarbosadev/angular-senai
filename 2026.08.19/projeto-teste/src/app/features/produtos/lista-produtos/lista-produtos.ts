@@ -1,6 +1,7 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { PrecoBrlFormatadoPipe } from '../../../shared/pipes/preco-brl-formatado-pipe';
+import { HttpClient } from '@angular/common/http';
 
 type ProdutoType = { nome: string; preco: number };
 @Component({
@@ -10,7 +11,12 @@ type ProdutoType = { nome: string; preco: number };
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
-  constructor() {
+  produtos = signal<ProdutoType[]>([]);
+  carregando = signal(true)
+
+
+  constructor(private http: HttpClient) {
+    this.carregarProdutos()
     effect(() => {
       if (typeof document !== 'undefined') {
         document.title = `${this.totalProdutos()} - Minha loja`;
@@ -23,6 +29,27 @@ export class ListaProdutos {
       console.log(`Lista de produtos alterada: ${this.produtos()}`);
       console.log(`Valor total atualizado: ${this.valorTotal()}`);
     });
+  }
+
+  carregarProdutos() {
+    this.carregando.set(true)
+    this.http.get<{title: string, price: number}[]>("https://fakestoreapi.com/products").subscribe(
+      {
+        next: (data) => {
+          const produtosFormatados = data.map(p => ({
+            nome: p.title,
+            preco: p.price
+          }))
+
+          this.produtos.set(produtosFormatados)
+          this.carregando.set(false)
+        },
+        error: (error) => {
+          console.error(`Erro ao carregar produtos: ${error}`);
+          this.carregando.set(false)
+        }
+      }
+    )
   }
 
   exibirProdutos(produto: ProdutoType) {
@@ -54,9 +81,4 @@ export class ListaProdutos {
     return this.produtos().reduce((total, item) => total + item.preco, 0);
   });
 
-  produtos = signal([
-    { nome: 'Mouse', preco: 122 },
-    { nome: 'Teclado', preco: 252 },
-    { nome: 'Monitor', preco: 2712 },
-  ]);
 }

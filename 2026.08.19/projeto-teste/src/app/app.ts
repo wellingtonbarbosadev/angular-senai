@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { login, logout, usuarioLogado } from './core/auth';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('projeto-teste');
+
+  usuarioLogado = usuarioLogado
+  login = login
+  logout = logout
 }
