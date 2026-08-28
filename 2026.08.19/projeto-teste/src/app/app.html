@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <main class="container">
-  <section>
+  <section class="bloco-controle">
     @if (usuarioLogado()) {
       <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
     } @else {
