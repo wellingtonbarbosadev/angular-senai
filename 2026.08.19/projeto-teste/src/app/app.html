@@ -1,16 +1,12 @@
-<h1>Minha Loja</h1>
-<nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/produtos">Produtos</a>
-  <a routerLink="/carrinho">Carrinho</a>
-</nav>
+<app-header></app-header>
 
-@if (usuarioLogado()) {
-  <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
-} @else {
-  <button mat-flat-button (click)="login()">Login</button>
-}
-
-<hr />
-
-<router-outlet></router-outlet>
+<main class="container">
+  <section>
+    @if (usuarioLogado()) {
+      <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
+    } @else {
+      <button mat-flat-button (click)="login()">Login</button>
+    }
+  </section>
+  <router-outlet></router-outlet>
+</main>
