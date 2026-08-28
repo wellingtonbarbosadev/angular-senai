@@ -3,7 +3,7 @@ import { Produto } from '../produto/produto';
 import { PrecoBrlFormatadoPipe } from '../../../shared/pipes/preco-brl-formatado-pipe';
 import { ProdutosService } from '../produtos.service';
 
-type ProdutoType = { nome: string; preco: number };
+export type ProdutoType = { nome: string; preco: number };
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto, PrecoBrlFormatadoPipe],
@@ -13,6 +13,7 @@ type ProdutoType = { nome: string; preco: number };
 export class ListaProdutos {
   produtos = signal<ProdutoType[]>([]);
   carregando = signal(true)
+  erro = signal<string | null>(null);
 
   service = new ProdutosService()
 
@@ -34,6 +35,7 @@ export class ListaProdutos {
   }
 
   carregarProdutos() {
+    this.erro.set(null);
     this.carregando.set(true)
     this.service.buscarProdutos().subscribe({
       next: (dados) => {
@@ -43,6 +45,7 @@ export class ListaProdutos {
       },
       error: (error) => {
         console.error("Ocorreu um erro ao carregar os produtos:", error);
+        this.erro.set(error);
         this.carregando.set(false)
       }
     })

@@ -15,14 +15,23 @@
   <p>Carregando produtos...</p>
 }
 
-@for (produto of produtos(); track $index) {
-  <app-produto
-    [nome]="produto.nome"
-    [preco]="produto.preco"
-    (produtoSelecionado)="exibirProdutos($event)"
-  ></app-produto>
+@if (erro()) {
+  <p style="color: red">
+    {{ erro() }}
+  </p>
+  <button (click)="carregarProdutos()">Tentar novamente</button>
+}
 
-  <button (click)="adicionarAoCarrinho(produto)">Adicionar ao carrinho</button>
+@if (!carregando() && !erro()) {
+  <p>Total de produtos: {{ totalProdutos() }}</p>
+  <hr />
+
+  @for (produto of produtos(); track $index) {
+    <app-produto
+      [nome]="produto.nome"
+      [preco]="produto.preco"
+    ></app-produto>
+  }
 }
 
 <h2>Total de produtos: {{ totalProdutos() }}</h2>
