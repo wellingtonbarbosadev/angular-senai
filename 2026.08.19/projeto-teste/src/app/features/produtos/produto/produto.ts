@@ -2,10 +2,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
 import { PrecoBrlFormatadoPipe } from '../../../shared/pipes/preco-brl-formatado-pipe';
 import { ProdutoType } from '../lista-produtos/lista-produtos';
+import { MatButtonModule } from '@angular/material/button';
+
+import { MatCardModule } from '@angular/material/card';
+
 
 @Component({
   selector: 'app-produto',
-  imports: [UpperCasePipe, PrecoBrlFormatadoPipe],
+  imports: [UpperCasePipe, PrecoBrlFormatadoPipe, MatButtonModule, MatCardModule],
   templateUrl: './produto.html',
   styleUrl: './produto.css',
 })

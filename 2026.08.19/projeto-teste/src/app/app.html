@@ -6,9 +6,9 @@
 </nav>
 
 @if (usuarioLogado()) {
-  <button (click)="logout()">Logout</button>
+  <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
 } @else {
-  <button (click)="login()">Login</button>
+  <button mat-flat-button (click)="login()">Login</button>
 }
 
 <hr />

@@ -1,0 +1,15 @@
+.produto-card {
+  margin: 1rem;
+
+  mat-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: .5rem;
+    
+    button {
+      min-width: 300px;
+      width: 100%;
+    }
+  }
+}

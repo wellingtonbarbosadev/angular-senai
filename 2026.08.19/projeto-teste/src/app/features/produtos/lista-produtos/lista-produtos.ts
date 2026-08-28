@@ -2,11 +2,12 @@ import { Component, computed, effect, signal, inject } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { PrecoBrlFormatadoPipe } from '../../../shared/pipes/preco-brl-formatado-pipe';
 import { ProdutosService } from '../produtos.service';
+import { MatButtonModule } from "@angular/material/button"
 
 export type ProdutoType = { nome: string; preco: number };
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto, PrecoBrlFormatadoPipe],
+  imports: [Produto, PrecoBrlFormatadoPipe, MatButtonModule],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })

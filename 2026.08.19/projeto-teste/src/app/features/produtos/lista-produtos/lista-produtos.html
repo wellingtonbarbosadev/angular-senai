@@ -9,7 +9,7 @@
   }
 </h2>
 
-<p><button (click)="adicionarProduto()">Adicionar Produto</button></p>
+<p><button mat-raised-button="primary" (click)="adicionarProduto()">Adicionar Produto</button></p>
 
 @if (carregando()) {
   <p>Carregando produtos...</p>
@@ -26,12 +26,15 @@
   <p>Total de produtos: {{ totalProdutos() }}</p>
   <hr />
 
-  @for (produto of produtos(); track $index) {
-    <app-produto
-      [nome]="produto.nome"
-      [preco]="produto.preco"
-    ></app-produto>
-  }
+  <section class="produtos">
+    @for (produto of produtos(); track $index) {
+      <app-produto
+        [nome]="produto.nome"
+        [preco]="produto.preco"
+        (produtoAdicionado)="adicionarAoCarrinho($event)"
+      ></app-produto>
+    }
+  </section>
 }
 
 <h2>Total de produtos: {{ totalProdutos() }}</h2>
